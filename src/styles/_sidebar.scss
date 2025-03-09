@@ -1,4 +1,7 @@
 .sidebar {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   position: fixed;
   top: 70px;
   left: 0;
@@ -34,8 +37,8 @@
     }
 
     &:hover {
-      border-left: 4px solid #5a9bd4; /* Highlight border */
-      background-color: #d4e3f4; /* Optional subtle background */
+      border-left: 4px solid $caribbean-blue;
+      background-color: $caribbean-blue-light;
       cursor: pointer;
 
       a {
@@ -85,8 +88,8 @@
       }
 
       &:hover {
-        border-left: 4px solid #5a9bd4; /* Highlight border */
-        background-color: #d4e3f4; /* Optional subtle background */
+        border-left: 4px solid $caribbean-blue;
+        background-color: $caribbean-blue-light;
         cursor: pointer;
       }
     }

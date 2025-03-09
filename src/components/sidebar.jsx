@@ -1,94 +1,74 @@
 import { Link } from 'react-router-dom'
-import { useState } from 'react'
 import { useAuthContext } from '../context/authContext'
-import NightsStayIcon from '@mui/icons-material/NightsStay'
-import PublicIcon from '@mui/icons-material/Public'
-import AddBoxIcon from '@mui/icons-material/AddBox'
-import AutoGraphIcon from '@mui/icons-material/AutoGraph'
-import AccountCircleIcon from '@mui/icons-material/AccountCircle'
-import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome'
+import { useMemo } from 'react'
 
-import MeetingRoomIcon from '@mui/icons-material/MeetingRoom'
+// Icons
+import {
+  NightsStay as NightsStayIcon,
+  Public as PublicIcon,
+  AddBox as AddBoxIcon,
+  AutoGraph as AutoGraphIcon,
+  AccountCircle as AccountCircleIcon,
+  AutoAwesome as AutoAwesomeIcon,
+  Logout as LogoutIcon,
+  Mood as MoodIcon,
+  Insights as InsightsIcon,
+  ArrowLeft as ArrowLeftIcon,
+  ArrowRight as ArrowRightIcon
+} from '@mui/icons-material'
 
-import ArrowLeftIcon from '@mui/icons-material/ArrowLeft'
-import ArrowRightIcon from '@mui/icons-material/ArrowRight'
-import LogoutIcon from '@mui/icons-material/Logout'
-import MoodIcon from '@mui/icons-material/Mood'
-import InsightsIcon from '@mui/icons-material/Insights'
 const Sidebar = ({ isSidebarOpen, toggleSidebar }) => {
-  // const [isSidebarOpen, setIsSidebarOpen] = useState(false)
   const { user, logout } = useAuthContext()
 
-  return (
-    <>
-      <div className='mobile-nav'></div>
+  // Define menu items in an array for cleaner mapping
+  const menuItems = useMemo(
+    () => [
+      { path: '/mine-dreams', label: 'My Dreams', icon: <AutoAwesomeIcon /> },
+      { path: '/analysis', label: 'Analytics', icon: <AutoGraphIcon /> },
+      { path: '/add-dream', label: 'Add New Dream', icon: <AddBoxIcon /> },
+      { path: '/profile', label: 'My Profile', icon: <AccountCircleIcon /> },
+      { path: '/public-dreams', label: 'Public Dreams', icon: <PublicIcon /> },
+      { path: '/moods-tracker', label: 'Mood Tracker', icon: <MoodIcon /> },
+      {
+        path: '/moods-analysis',
+        label: 'Mood Analysis',
+        icon: <InsightsIcon />
+      }
+    ],
+    []
+  )
 
-      <div className={`sidebar ${isSidebarOpen ? 'open' : 'closed'}`}>
-        <div className='sidebar-header'>
-          <button className='sidebar-toggle-btn' onClick={toggleSidebar}>
-            {isSidebarOpen ? <ArrowLeftIcon /> : <ArrowRightIcon />}
-          </button>
-        </div>
-        <ul
-          className={` ${
-            isSidebarOpen ? 'sidebar-list-open' : 'sidebar-list-close'
-          }`}
-        >
-          <li className='menu-item'>
-            <Link to='/mine-dreams'>
-              <AutoAwesomeIcon />
-              {isSidebarOpen && <span>My Dreams</span>}
+  return (
+    <div className={`sidebar ${isSidebarOpen ? 'open' : 'closed'}`}>
+      {/* Sidebar Header / Toggle Button */}
+      <div className='sidebar-header'>
+        <button className='sidebar-toggle-btn' onClick={toggleSidebar}>
+          {isSidebarOpen ? <ArrowLeftIcon /> : <ArrowRightIcon />}
+        </button>
+      </div>
+
+      {/* Menu List */}
+      <ul className='menu-list'>
+        {menuItems.map(({ path, label, icon }) => (
+          <li key={path} className='menu-item'>
+            <Link to={path}>
+              {icon} {isSidebarOpen && <span>{label}</span>}
             </Link>
           </li>
-          <li className='menu-item'>
-            <Link to='/analysis'>
-              <AutoGraphIcon />
-              {isSidebarOpen && <span>Analytics</span>}
-            </Link>
-          </li>
-          <li className='menu-item'>
-            <Link to='/add-dream'>
-              <AddBoxIcon />
-              {isSidebarOpen && <span>Add New Dream</span>}
-            </Link>
-          </li>
-          <li className='menu-item'>
-            <Link to='/profile'>
-              <AccountCircleIcon />
-              {isSidebarOpen && <span>My Profile</span>}
-            </Link>
-          </li>
-          <li className='menu-item'>
-            <Link to='/public-dreams'>
-              <PublicIcon />
-              {isSidebarOpen && <span>Public Dreams</span>}
-            </Link>
-          </li>
-          <li className='menu-item'>
-            <Link to='/moods-tracker'>
-              <MoodIcon />
-              {isSidebarOpen && <span>Mood tracker</span>}
-            </Link>
-          </li>
-          <li className='menu-item'>
-            <Link to='/moods-analysis'>
-              <InsightsIcon />
-              {isSidebarOpen && <span>Mood analysis</span>}
+        ))}
+      </ul>
+
+      {/* Sidebar Footer */}
+      <div className='sidebar-footer'>
+        <ul>
+          <li className='menu-item' onClick={logout}>
+            <Link to='/'>
+              <LogoutIcon /> {isSidebarOpen && <span>Logout</span>}
             </Link>
           </li>
         </ul>
-        <div className='sidebar-footer'>
-          <ul>
-            <li className='menu-item' onClick={logout}>
-              <Link to='/'>
-                <LogoutIcon />
-                {isSidebarOpen && <span>Logout</span>}
-              </Link>
-            </li>
-          </ul>
-        </div>
       </div>
-    </>
+    </div>
   )
 }
 
