@@ -1,6 +1,3 @@
-
-
-
 /******* signup *******/
 
 .form-container {
@@ -23,7 +20,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.3); 
+  background-color: rgba(0, 0, 0, 0.3);
   z-index: 1;
 }
 
@@ -53,8 +50,7 @@ form {
 }
 
 .icon {
-  font-size: 18px; 
-   
+  font-size: 18px;
 }
 
 label {
@@ -99,12 +95,7 @@ p[style='color: green'] {
   color: green;
 }
 
-
-
-
-
-
-=======
+/* ======= */
 nav {
   display: flex;
   align-items: center;
@@ -245,4 +236,3 @@ p[style='color: red'] {
 p[style='color: green'] {
   color: green;
 } */
-

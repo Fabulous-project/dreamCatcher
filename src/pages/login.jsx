@@ -42,7 +42,7 @@ const Login = () => {
 
                 <InputField
                   iconBefore={emailIcon}
-                  className='inputField mediumInput'
+                  className='inputField mediumInput '
                   // label='Email'
                 >
                   <input

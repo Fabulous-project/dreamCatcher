@@ -37,7 +37,6 @@
   width: 120px;
 }
 
-/* Shared styles for input and textarea */
 .inputContainer textarea,
 .inputContainer input {
   border: none;
@@ -54,17 +53,16 @@
   transition: border-color 0.3s ease;
 }
 
-/* Input-specific styles */
 .inputContainer input {
   min-height: 38px;
-  width: 100%; /* Keep input responsive */
+  flex: 1;
 }
 
 /* Textarea-specific styles */
 .inputContainer textarea {
   min-height: 120px;
-  width: 100%; /* Fixed width for textarea */
-  resize: vertical; /* Allows resizing vertically only */
+  width: 100%;
+  resize: vertical;
 }
 
 .inputContainer textarea:focus,
@@ -79,6 +77,8 @@
 
 .inputContainer .passwordToggleIcon {
   cursor: pointer;
+  position: absolute;
+  right: 1%;
 }
 
 .inputContainer .passwordToggleIcon.hidden {
@@ -104,6 +104,7 @@
     padding-left: 10px;
     margin: 6px 0;
     width: 100%;
+    position: relative;
   }
 
   .inputContainer .inputField.xlargeInput,
@@ -117,7 +118,7 @@
     padding: 10px;
     font-size: 0.9rem;
     border-radius: 4px;
-    width: 100%; /* Ensure textarea adjusts to screen width on small screens */
+    width: 100%;
     min-height: 120px;
   }
 }
