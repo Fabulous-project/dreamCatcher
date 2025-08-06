@@ -5,30 +5,38 @@
   position: fixed;
   top: 70px;
   left: 0;
-  height: calc(100vh - 70px);
-  width: 70px;
-  // background-color: #ddedea;
+  width: 100%;
+  height: auto;
   background-color: #daeaf6;
   overflow-y: auto;
   z-index: 10;
   transition: width 0.3s ease, transform 0.3s ease;
 
   &.open {
-    width: 250px;
+    width: 100%;
+  }
+
+  &.closed {
+    transform: translateX(0%);
+    width: 70px;
   }
 
   .sidebar-header {
-    display: flex;
-    justify-content: flex-end;
-    padding: 10px;
+    display: none;
+  }
+
+  .menu-list {
+    padding: 7px;
   }
 
   .menu-item {
     display: flex;
     align-items: center;
+    justify-content: center;
     padding: 10px;
     list-style: none;
     border-bottom: 1px solid white;
+
     a {
       display: flex;
       align-items: center;
@@ -52,23 +60,27 @@
     }
 
     span {
+      display: none;
       white-space: nowrap;
       transition: opacity 0.3s ease;
     }
   }
+
   .sidebar-list-open {
     padding: 12px;
   }
+
   .sidebar-list-close {
     padding: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
   }
-  .sidebar-footer {
-    margin-top: 40vh;
 
+  .sidebar-footer {
+    margin-top: 49vh;
     border-top: 1px solid white;
+
     ul {
       list-style: none;
       margin: 0;
@@ -117,28 +129,33 @@
     transform: rotate(180deg);
   }
 }
-/* Mobile adjustments */
-@media (max-width: 490px) {
+
+/* Desktop styles */
+@media (min-width: 491px) {
   .sidebar {
-    width: 100%;
-    height: auto;
-    position: fixed;
-    transform: translateY(-100%);
-  }
+    width: 70px;
+    height: calc(100vh - 70px);
 
-  .sidebar.open {
-    transform: translateY(0);
-  }
+    &.open {
+      width: 250px;
+    }
 
-  .sidebar.closed {
-    transform: translateY(-100%);
-  }
+    &.closed {
+      width: 70px;
+    }
 
-  .menu-item {
-    justify-content: center;
+    .sidebar-header {
+      display: flex;
+      justify-content: flex-end;
+      padding: 10px;
+    }
 
-    span {
-      display: none;
+    .menu-item {
+      justify-content: flex-start;
+
+      span {
+        display: inline;
+      }
     }
   }
 }

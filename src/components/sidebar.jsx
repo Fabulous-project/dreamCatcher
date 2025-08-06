@@ -1,6 +1,6 @@
+import { useEffect, useState, useMemo } from 'react'
 import { Link } from 'react-router-dom'
 import { useAuthContext } from '../context/authContext'
-import { useMemo } from 'react'
 
 // Icons
 import {
@@ -20,7 +20,19 @@ import {
 const Sidebar = ({ isSidebarOpen, toggleSidebar }) => {
   const { user, logout } = useAuthContext()
 
-  // Define menu items in an array for cleaner mapping
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 490)
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 490)
+    }
+
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
+
+  const sidebarClass = isSidebarOpen && !isMobile ? 'open' : 'closed'
+
   const menuItems = useMemo(
     () => [
       { path: '/mine-dreams', label: 'My Dreams', icon: <AutoAwesomeIcon /> },
@@ -39,31 +51,28 @@ const Sidebar = ({ isSidebarOpen, toggleSidebar }) => {
   )
 
   return (
-    <div className={`sidebar ${isSidebarOpen ? 'open' : 'closed'}`}>
-      {/* Sidebar Header / Toggle Button */}
+    <div className={`sidebar ${sidebarClass}`}>
       <div className='sidebar-header'>
         <button className='sidebar-toggle-btn' onClick={toggleSidebar}>
           {isSidebarOpen ? <ArrowLeftIcon /> : <ArrowRightIcon />}
         </button>
       </div>
 
-      {/* Menu List */}
       <ul className='menu-list'>
         {menuItems.map(({ path, label, icon }) => (
           <li key={path} className='menu-item'>
             <Link to={path}>
-              {icon} {isSidebarOpen && <span>{label}</span>}
+              {icon} {isSidebarOpen && !isMobile && <span>{label}</span>}
             </Link>
           </li>
         ))}
       </ul>
 
-      {/* Sidebar Footer */}
       <div className='sidebar-footer'>
         <ul>
           <li className='menu-item' onClick={logout}>
             <Link to='/'>
-              <LogoutIcon /> {isSidebarOpen && <span>Logout</span>}
+              <LogoutIcon /> {isSidebarOpen && !isMobile && <span>Logout</span>}
             </Link>
           </li>
         </ul>
