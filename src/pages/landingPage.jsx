@@ -1,9 +1,16 @@
 import { useNavigate } from 'react-router-dom'
-
+import { useAuthContext } from '../context/authContext'
 const LandingPage = () => {
   const navigate = useNavigate()
-  const handleRedirect = () => {
-    navigate('/signup')
+
+  const { token } = useAuthContext()
+
+  const checkToken = () => {
+    if (token) {
+      navigate('/mine-dreams')
+    } else {
+      navigate('/signup')
+    }
   }
 
   return (
@@ -15,7 +22,7 @@ const LandingPage = () => {
             A personal space to log, analyze, and unlock the mysteries of your
             subconscious mind.
           </p>
-          <button className='cta-button' onClick={handleRedirect}>
+          <button className='cta-button' onClick={checkToken}>
             Start Your Journey
           </button>
         </div>
@@ -41,7 +48,7 @@ const LandingPage = () => {
 
       <section className='cta-section'>
         <h5>Ready to Uncover Your Dreams?</h5>
-        <button className='cta-button' onClick={handleRedirect}>
+        <button className='cta-button' onClick={checkToken}>
           Get Started Now
         </button>
       </section>

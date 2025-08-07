@@ -56,7 +56,6 @@ export const AuthProvider = ({ children }) => {
       const authToken = res.data.authToken
       const userDataResponse = res.data.user
 
-      // Save token and user data
       setToken(authToken)
       setUser(userDataResponse)
       console.log(authToken)
